@@ -64,8 +64,8 @@ public class World extends PApplet{
 		applet.openPGraphics(applet.GameBuffer);
 		this.gameBuffer.background(0,0,0);
 		this.gameBuffer.image(starsEffect.getBuffer(), World.floor(camera.getX()), World.floor(camera.getY()), gameBuffer.width, gameBuffer.height);
-		this.gameBuffer.fill(255,0,255);
-		this.gameBuffer.ellipse(0, 0, 250, 250);
+		this.gameBuffer.fill(0,0,255);
+		this.gameBuffer.ellipse(0, 0, 255, 255);
 		
 		gameBuffer.text("text lol", 0, 0);
 		applet.closePGraphics(gameBuffer);
