@@ -146,4 +146,35 @@ public class Camera {
 		
 		mouseCalculated = false;
 	}
+	
+	
+	/**
+	 * inCameraRange()
+	 * calculates if a given circle is within the viewbox of the camera.
+	 * 
+	 * @param otherX
+	 * @param otherY
+	 * @param size
+	 * @return true if the sphere of a given size is visible to the camera.
+	 */
+	public boolean inCameraRange(float otherX, float otherY, float size) {
+		float testX, testY;
+		if(otherX < this.x) {
+			testX = this.x-320f;
+		} else {
+			testX = this.x+320f;
+		}
+		
+		if(otherY < this.y) {
+			testY = this.y-320f;
+		} else {
+			testY = this.y+320f;
+		}
+		
+		float distX = otherX-testX;
+		float distY = otherY-testY;
+		float distance = World.sqrt((distX * distX) + (distY * distY));
+		
+		return distance <= size;
+	}
 }

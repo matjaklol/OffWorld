@@ -51,6 +51,7 @@ public class Player extends Entity{
 		this.vec.damping(0.01f);
 		this.vec.update();
 		
+		
 	}
 	
 	public void update() {
