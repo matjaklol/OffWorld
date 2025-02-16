@@ -10,7 +10,7 @@ public class SolarSystem {
 	public SolarSystem(World world, long seed) {
 		this.world = world;
 		this.seed = seed;
-		
+		world.randomSeed(seed);
 		generateSystem();
 	}
 	

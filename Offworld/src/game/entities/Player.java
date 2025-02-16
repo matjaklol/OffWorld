@@ -12,7 +12,7 @@ public class Player extends Entity{
 		super(world);
 		this.keyboard = world.keyboard;
 		this.vec = new MVector(world);
-		this.vec.maxSpeed(1000f);
+		this.vec.maxSpeed(300f);
 		this.vec.mass(63);
 //		this.vec.maxAcceleration(50f);
 		this.vec.setFrictionConstant(0.5f);
@@ -52,6 +52,12 @@ public class Player extends Entity{
 		this.vec.update();
 		
 		
+	}
+	
+	public void setPosition(PVector position) {
+		this.position = position;
+		this.vec.x = position.x;
+		this.vec.y = position.y;
 	}
 	
 	public void update() {

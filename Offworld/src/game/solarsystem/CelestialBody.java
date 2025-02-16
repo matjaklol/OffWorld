@@ -11,6 +11,9 @@ public class CelestialBody {
 	protected MVector position = new MVector();
 	protected World world;
 	protected PGraphics graphic;
+	protected long seed;
+	
+	public float mass = 0f;
 	protected ArrayList<CelestialBody> children = new ArrayList<CelestialBody>();
 	public CelestialBody(World world, PGraphics graphic) {
 		this.world = world;
