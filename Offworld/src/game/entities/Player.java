@@ -7,12 +7,12 @@ import game.physics.MVector;
 public class Player extends Entity{
 	private Keyboard keyboard;
 	private MVector vec;
-	private float speed = 800.0f;
+	private float speed = 8000.0f;
 	public Player(World world) {
 		super(world);
 		this.keyboard = world.keyboard;
 		this.vec = new MVector(world);
-		this.vec.maxSpeed(300f);
+		this.vec.maxSpeed(30000f);
 		this.vec.mass(63);
 //		this.vec.maxAcceleration(50f);
 		this.vec.setFrictionConstant(0.5f);

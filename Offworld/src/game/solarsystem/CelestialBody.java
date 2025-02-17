@@ -40,15 +40,18 @@ public class CelestialBody {
 		return this.world.camera.inCameraRange(this.position.x, this.position.y, 100f);
 	}
 	
-	protected void movementUpdate() {
+	protected void updateMovement() {
 		this.position.update();
 	}
 	
-	public void update() {
-		this.movementUpdate();
+	protected void updateChildren() {
 		for(int i = 0; i < this.children.size(); i++) {
 			this.children.get(i).update();
 		}
+	}
+	public void update() {
+		this.updateMovement();
+		this.updateChildren();
 	}
 	
 	public void draw() {
