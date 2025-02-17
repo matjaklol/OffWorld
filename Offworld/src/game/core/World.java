@@ -4,6 +4,7 @@ import processing.core.*;
 import processing.opengl.PGraphicsOpenGL;
 import game.effects.BackgroundStars;
 import game.entities.Player;
+import game.solarsystem.SolarSystem;
 import game.userinput.Keyboard;
 import main.GameApplet;
 
@@ -14,19 +15,23 @@ public class World extends PApplet{
 	
 	public GameApplet applet;
 	public Camera camera;
-	private PGraphics gameBuffer;
+	public PGraphics gameBuffer;
 	
 	
 	public Keyboard keyboard;
 	public BackgroundStars starsEffect;
 	public Player player;
+	
+	public SolarSystem solarSystem;
+	
+	long seed = 393235L;
 	public World(GameApplet applet) {
 		this.applet = applet;
 		this.gameBuffer = applet.GameBuffer;
 		
 		
 		
-		this.starsEffect = new BackgroundStars(this, 0L);
+		this.starsEffect = new BackgroundStars(this, seed);
 		for(int i = 0; i < this.points.length; i++) {
 			points[i] = new PVector(applet.random(-640/2, 640/2), applet.random(-360/2, 360/2), applet.random(-50, 200));
 		}
@@ -38,6 +43,8 @@ public class World extends PApplet{
 		
 		player = new Player(this);
 		camera.focusOn(player);
+		camera.setLerpSpeed(1f);
+		this.solarSystem = new SolarSystem(this, seed);
 	}
 	
 	public void update() {
@@ -46,6 +53,11 @@ public class World extends PApplet{
 //		System.out.println(camera.getX());
 		
 		player.update();
+		solarSystem.update();
+		
+		
+		
+		
 		oldMillis = newMillis;
 		newMillis = applet.millis();
 		
@@ -64,8 +76,10 @@ public class World extends PApplet{
 		applet.openPGraphics(applet.GameBuffer);
 		this.gameBuffer.background(0,0,0);
 		this.gameBuffer.image(starsEffect.getBuffer(), World.floor(camera.getX()), World.floor(camera.getY()), gameBuffer.width, gameBuffer.height);
-		this.gameBuffer.fill(255,0,255);
-		this.gameBuffer.ellipse(0, 0, 250, 250);
+		this.solarSystem.draw();
+		
+//		this.gameBuffer.fill(0,0,255);
+//		this.gameBuffer.ellipse(0, 0, 255, 255);
 		
 		gameBuffer.text("text lol", 0, 0);
 		applet.closePGraphics(gameBuffer);

@@ -32,6 +32,9 @@ public class Entity {
 		
 	}
 	
+	public float getSpeed() {
+		return 0f;
+	}
 	
 	protected void println(String data) {
 		System.out.println("[E."+this.getClass().getSimpleName()+"] "+data);

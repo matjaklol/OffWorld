@@ -80,7 +80,6 @@
     	<version>2.3.2</version>
     	<classifier>natives-windows-amd64</classifier>
 	</dependency>
-
-
+	
   </dependencies>
 </project>
