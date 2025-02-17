@@ -24,7 +24,7 @@ public class World extends PApplet{
 	
 	public SolarSystem solarSystem;
 	
-	long seed = 727L;
+	long seed = 393235L;
 	public World(GameApplet applet) {
 		this.applet = applet;
 		this.gameBuffer = applet.GameBuffer;
@@ -43,7 +43,7 @@ public class World extends PApplet{
 		
 		player = new Player(this);
 		camera.focusOn(player);
-		camera.setLerpSpeed(0.999999f);
+		camera.setLerpSpeed(1f);
 		this.solarSystem = new SolarSystem(this, seed);
 	}
 	

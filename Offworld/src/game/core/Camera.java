@@ -4,6 +4,9 @@ import main.Main;
 import processing.core.PVector;
 import game.entities.Entity;
 public class Camera {
+	public static int LERP = 1;
+	public static int SNAP = 0;
+	
 	private World world;
 	private Entity entity;
 	private PVector goalVector = new PVector(0, 0);
@@ -100,8 +103,22 @@ public class Camera {
 	}
 	
 	public void resetLerpSpeed() {
-		this.lerpSpeed = 0.3f;
+		this.lerpSpeed = 0.6f;
 	}
+	
+	private boolean snapping = false;
+	public void setFollowMode(int value) {
+		switch(value) {
+		case 0: this.snapping = true;
+		break;
+		case 1: this.snapping = false;
+		break;
+		default: setFollowMode(1);
+		}
+	}
+	
+	
+	
 	
 	public void update() {
 		if(entity != null) {
@@ -116,6 +133,13 @@ public class Camera {
 			goalX += Main.gameApplet.mouseX/amt - Main.gameApplet.width/(amt*2);
 			goalY += Main.gameApplet.mouseY/amt - Main.gameApplet.height/(amt*2);
 			
+			
+			if(snapping) {
+				x = goalX;
+				y = goalY;
+				mouseCalculated = false;
+				return;
+			}
 			
 			//Calculate the velocity needed to get to the given position, as a fraction (lerpSpeed).
 			float lerpX = World.lerp(x, goalX, lerpSpeed) - x;
@@ -137,6 +161,12 @@ public class Camera {
 //			float lerpX = Main.lerp(x, goalVector.x-640/2, lerpSpeed) - x;
 //			float lerpY = World.lerp(y, goalVector.y-360/2, lerpSpeed) - y;
 			
+			if(snapping) {
+				x = goalX;
+				y = goalY;
+				mouseCalculated = false;
+				return;
+			}
 			float lerpX = Main.lerp(x, goalX, lerpSpeed) - x;
 			float lerpY = World.lerp(y, goalY, lerpSpeed) - y;
 			//Still need to make it a smooth transition however.

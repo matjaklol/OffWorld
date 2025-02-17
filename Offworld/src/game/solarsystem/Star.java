@@ -15,11 +15,12 @@ public class Star extends CelestialBody {
 		this.mass = world.random(100_000, 500_000);
 //		this.mass = world.random(1_000, 5_000);
 		this.planetCount = (int) world.random(10);
-		
-		this.generateChildren();
-		
 		float angle = world.random(360);
 		world.player.setPosition(new PVector(World.cos(angle) * mass/2, World.sin(angle) * mass/2));
+		this.generateChildren();
+		
+		
+		
 	}
 	
 	protected void generateChildren() {

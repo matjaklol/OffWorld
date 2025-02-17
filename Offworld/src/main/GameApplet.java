@@ -124,7 +124,7 @@ public class GameApplet extends PApplet {
 //		world.update();
 		world.draw();
 		
-		this.tint(this.lerpColor(color(255, 255, 255), color(255, 0, 0), world.player.getSpeed()/30000f));
+		this.tint(this.lerpColor(color(255, 255, 255), color(255, 0, 0), world.player.getSpeed()/90_000f));
 		this.image(GameBuffer, 0, 0, width, height);
 		this.noTint();
 		this.image(vhsImage, 0, 0, width, height);
