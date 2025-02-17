@@ -8,8 +8,8 @@ public class Planet extends CelestialBody {
 	private float angle;
 	public int color;
 	
-	private double epochSeconds;
-	public Planet(World world, long seed, Star parentStar, int distanceStep) {
+	private float epochSeconds;
+	public Planet(World world, long seed, Star parentStar, float distanceStep) {
 		super(world, world.gameBuffer);
 		this.seed = seed;
 		this.mass = world.random(parentStar.mass/390, parentStar.mass/220);
@@ -17,7 +17,7 @@ public class Planet extends CelestialBody {
 		
 		
 		//Distance is = (distanceStep+n) * sun mass?
-		this.distance = ((distanceStep+2) * parentStar.mass/2);
+		this.distance = ((distanceStep+world.random(0, 1)) * parentStar.mass/2);
 		this.angle = world.random(-180, 180);
 		
 		
@@ -40,21 +40,31 @@ public class Planet extends CelestialBody {
 	
 	@Override
 	protected void updateMovement() {
-		epochSeconds = (double) (Instant.now().getEpochSecond()/10000d);
-		epochSeconds = epochSeconds%360d;   
-		System.out.println(epochSeconds);
-		this.position.x = World.cos(World.radians((float) epochSeconds)+angle) * this.distance;
-		this.position.y = World.sin(World.radians((float) epochSeconds)+angle) * this.distance;
+		
+		if(this.world.camera.inCameraRange(this.position.x, this.position.y, mass*2)) {
+			epochSeconds = CelestialBody.getEpochTime();
+			epochSeconds/=(this.mass*1000);
+			this.position.x = World.cos(World.radians((float) epochSeconds)+angle) * this.distance;
+			this.position.y = World.sin(World.radians((float) epochSeconds)+angle) * this.distance;
+		}
+		
 //		System.out.println("[x: "+this.position.x+", y: "+this.position.y+"]");
 	}
 	
 	
 	public void draw() {
+		graphic.strokeWeight(3);
+		graphic.stroke(this.color, 10);
+		graphic.fill(0,0,0,0);
+		graphic.ellipse(0, 0, this.distance*2, this.distance*2);
+		graphic.noStroke();
 		if(world.keyboard.getKey(32)) {
 			graphic.stroke(this.color);
 			graphic.line(this.position.x, this.position.y, world.player.getPosition().x, world.player.getPosition().y);
 		}
 		graphic.noStroke();
+		graphic.fill(this.color, 100);
+		graphic.ellipse(this.position.x, this.position.y, this.mass*1.1f, this.mass*1.1f);
 		graphic.fill(this.color);
 		graphic.ellipse(this.position.x, this.position.y, this.mass, this.mass);
 	}

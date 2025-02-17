@@ -13,6 +13,7 @@ public class Star extends CelestialBody {
 		this.seed = seed;
 		
 		this.mass = world.random(100_000, 500_000);
+//		this.mass = world.random(1_000, 5_000);
 		this.planetCount = (int) world.random(5);
 		
 		this.generateChildren();
@@ -23,7 +24,7 @@ public class Star extends CelestialBody {
 	
 	protected void generateChildren() {
 		for(int i = 0; i < this.planetCount; i++) {
-			this.children.add(new Planet(world, seed, this, i));
+			this.children.add(new Planet(world, seed, this, i+1.5f));
 		}
 	}
 	

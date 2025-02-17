@@ -54,6 +54,9 @@ public class Player extends Entity{
 		
 	}
 	
+	public float getSpeed() {
+		return vec.getSpeed();
+	}
 	public void setPosition(PVector position) {
 		this.position = position;
 		this.vec.x = position.x;

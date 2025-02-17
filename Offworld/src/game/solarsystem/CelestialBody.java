@@ -5,6 +5,8 @@ import game.physics.MVector;
 import main.GameApplet;
 import processing.core.PVector;
 import processing.core.PGraphics;
+
+import java.time.Instant;
 import java.util.ArrayList;
 import game.core.Camera;
 public class CelestialBody {
@@ -21,6 +23,18 @@ public class CelestialBody {
 		this.position.setWorld(world);
 	}
 	
+	
+	/**
+	 * getEpochTime()
+	 * returns a timestamp value in a float form, which updates each call.
+	 * This timestamp is useful for anything that orbits as it allows for planets to remain consistent to their orbits even if the game 
+	 * is closed. 
+	 * @return a float values in the form of (second).(milliseconds). Recommended that you divide this value by at least 1000.
+	 */
+	public static float getEpochTime() {
+		return ((float) (Instant.now().getEpochSecond() - 1739758570L)) + ((float) (Instant.now().getNano()/1_000_000_000d));
+		
+	}
 	public void setPosition(PVector newPosition) {
 		this.position.x = newPosition.x;
 		this.position.y = newPosition.y;

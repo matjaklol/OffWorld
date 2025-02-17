@@ -41,7 +41,7 @@ public class World extends PApplet{
 		
 		player = new Player(this);
 		camera.focusOn(player);
-		camera.setLerpSpeed(1.2f);
+		camera.setLerpSpeed(0.999999f);
 		this.solarSystem = new SolarSystem(this, 0L);
 	}
 	

@@ -335,7 +335,9 @@ public class MVector {
 	}
 	
 	
-	
+	public float getSpeed() {
+		return MVector.mag(this.velX, this.velY, this.velZ);
+	}
 	
 	public void update() {
 //		this.limitVel();
