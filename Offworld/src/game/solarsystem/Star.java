@@ -14,7 +14,7 @@ public class Star extends CelestialBody {
 		
 		this.mass = world.random(100_000, 500_000);
 //		this.mass = world.random(1_000, 5_000);
-		this.planetCount = (int) world.random(5);
+		this.planetCount = (int) world.random(10);
 		
 		this.generateChildren();
 		

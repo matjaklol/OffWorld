@@ -23,13 +23,15 @@ public class World extends PApplet{
 	public Player player;
 	
 	public SolarSystem solarSystem;
+	
+	long seed = 727L;
 	public World(GameApplet applet) {
 		this.applet = applet;
 		this.gameBuffer = applet.GameBuffer;
 		
 		
 		
-		this.starsEffect = new BackgroundStars(this, 0L);
+		this.starsEffect = new BackgroundStars(this, seed);
 		for(int i = 0; i < this.points.length; i++) {
 			points[i] = new PVector(applet.random(-640/2, 640/2), applet.random(-360/2, 360/2), applet.random(-50, 200));
 		}
@@ -42,7 +44,7 @@ public class World extends PApplet{
 		player = new Player(this);
 		camera.focusOn(player);
 		camera.setLerpSpeed(0.999999f);
-		this.solarSystem = new SolarSystem(this, 0L);
+		this.solarSystem = new SolarSystem(this, seed);
 	}
 	
 	public void update() {
