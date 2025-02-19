@@ -22,10 +22,11 @@ public class Planet extends CelestialBody {
 		//Distance is = (distanceStep+n) * sun mass?
 		this.distance = ((distanceStep+world.random(0, 1)) * parentStar.mass/2);
 		this.angle = world.random(-180, 180);
+		this.epochSeconds = CelestialBody.getEpochTime()/(this.mass*10)   ;
 		
 		
-		this.position.x = World.cos(angle) * this.distance;
-		this.position.y = World.sin(angle) * this.distance;
+		this.position.x = World.cos(angle + World.radians(epochSeconds)) * this.distance;
+		this.position.y = World.sin(angle + World.radians(epochSeconds)) * this.distance;
 		
 		
 		this.childCount = (int) world.random(0, maxKids);
@@ -50,12 +51,12 @@ public class Planet extends CelestialBody {
 	@Override
 	protected void updateMovement() {
 		
-		if(this.world.camera.inCameraRange(this.position.x + this.parent.position.x, this.position.y + this.parent.position.y , mass*2)) {
+//		if(this.world.camera.inCameraRange(this.position.x + this.parent.position.x, this.position.y + this.parent.position.y , mass*2)) {
 			epochSeconds = CelestialBody.getEpochTime();
-			epochSeconds/=(this.mass*100);
+			epochSeconds/=(this.mass*10);
 			this.position.x = World.cos(World.radians((float) epochSeconds)+angle) * this.distance;
 			this.position.y = World.sin(World.radians((float) epochSeconds)+angle) * this.distance;
-		}
+//		}
 		
 //		System.out.println("[x: "+this.position.x+", y: "+this.position.y+"]");
 	}

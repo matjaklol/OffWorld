@@ -8,10 +8,12 @@ import game.physics.MVector;
 public class Player extends Entity{
 	private Keyboard keyboard;
 	private MVector vec;
-	private float speed = 500.0f;
+	private float speed = 25.0f;
+	private float maxVelocity = 300f;
 	public Player(World world) {
 		super(world);
 		this.keyboard = world.keyboard;
+		world.camera.setFollowMode(Camera.SNAP);
 		this.vec = new MVector(world);
 		this.vec.maxSpeed(300f);
 		this.vec.mass(63);
@@ -47,17 +49,20 @@ public class Player extends Entity{
 //			this.vec.impulse(speed, 0);
 		}
 		
+		speedVector.mult(speed);
+		
 		if(keyboard.getKey(16) && speedVector.mag() > 0) {
 			this.vec.maxSpeed(90_000);
-			this.speed = 1600f;
-			world.camera.setFollowMode(Camera.SNAP);
+			this.speed = 2000;
+//			world.camera.setFollowMode(Camera.SNAP);
 		} else {
-			world.camera.setFollowMode(Camera.LERP);
-			this.speed = 500f;
-			this.vec.maxSpeed(300);		}
-		speedVector.setMag(speed);
+//			world.camera.setFollowMode(Camera.LERP);
+			this.vec.maxSpeed(300);
+			this.speed = 300;
+		}
+		speedVector.mult(speed);
 		this.vec.addVelocity(speedVector);
-		this.vec.damping(0.01f);
+		this.vec.damping(0.1f);
 		this.vec.update();
 		
 		
