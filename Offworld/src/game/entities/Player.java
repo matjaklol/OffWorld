@@ -1,10 +1,16 @@
 package game.entities;
 
 import processing.core.PVector;
+
+import java.lang.reflect.Method;
+
 import game.core.Camera;
 import game.core.World;
+import main.GameApplet;
+import main.Main;
 import game.userinput.Keyboard;
 import game.physics.MVector;
+import processing.event.MouseEvent;
 public class Player extends Entity{
 	private Keyboard keyboard;
 	private MVector vec;
@@ -15,9 +21,8 @@ public class Player extends Entity{
 		this.vec = new MVector(world);
 		this.vec.maxSpeed(300f);
 		this.vec.mass(63);
-//		this.vec.maxAcceleration(50f);
 		this.vec.setFrictionConstant(0.5f);
-		// TODO Auto-generated constructor stub
+		Main.gameApplet.mouse.registerMethod("mouseEvent", this);
 	}
 	
 	private void movement() {
@@ -63,6 +68,24 @@ public class Player extends Entity{
 		
 	}
 	
+	public void mouseEvent(MouseEvent event) {
+		if(event.getAction() == MouseEvent.MOVE) {
+			println("MOVED");
+			return;
+		}
+		if(event.getAction() == MouseEvent.CLICK && event.getButton() == World.LEFT) {
+			this.println("CLICKED!!!!");
+		}
+		
+		if(event.getAction() == MouseEvent.WHEEL) {
+			int amount = event.getCount();
+			if(amount > 0) {
+				println("Zooming out? "+amount);
+			} else {
+				println("Zooming in? " + amount);
+			}
+		}
+	}
 	public float getSpeed() {
 		return vec.getSpeed();
 	}

@@ -37,6 +37,7 @@ public class World extends PApplet{
 		}
 		
 		this.keyboard = applet.keyboard;
+		this.applet.registerMethod("post", this);
 	}
 	
 	public void setup() {
@@ -58,6 +59,10 @@ public class World extends PApplet{
 		
 		
 		
+		
+	}
+	
+	public void post() {
 		oldMillis = newMillis;
 		newMillis = applet.millis();
 		

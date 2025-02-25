@@ -6,3 +6,4 @@
  *
  */
 package main;
+import game.entities.*;

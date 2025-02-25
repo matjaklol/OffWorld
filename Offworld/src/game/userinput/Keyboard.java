@@ -1,8 +1,12 @@
 package game.userinput;
 
-import main.GameApplet;
-import java.util.Map;
 import java.util.HashMap;
+import java.util.Map;
+
+import game.core.World;
+import main.GameApplet;
+import processing.event.KeyEvent;
+import processing.core.PApplet;
 
 /**
  * KeyboardHandler is a class that handles all keyboard inputs 
@@ -21,7 +25,7 @@ public class Keyboard {
 	private Map<Integer, Boolean> typedKeyCode;
 	
 	/**
-	 * The World Reference that the keyboard handler uses to get keyboard inputs.
+	 * The Applet Reference that the keyboard handler uses to get keyboard inputs.
 	 */
 	private GameApplet testScreen;
 	
@@ -34,11 +38,15 @@ public class Keyboard {
 	 * @see World
 	 */
 	public Keyboard(GameApplet toAdd) {
+		println("Initializing...");
 		this.testScreen = toAdd;
 		keys = new HashMap<Character, Boolean>();
 		keyCodes = new HashMap<Integer, Boolean>();
 		typedKey = new HashMap<Character, Boolean>();
 		typedKeyCode = new HashMap<Integer, Boolean>();
+		
+		toAdd.registerMethod("post", this);
+		println("Initialized successfully.");
 	}
 	
 	/**
@@ -95,13 +103,32 @@ public class Keyboard {
 		for(Map.Entry<Integer, Boolean> entry : typedKeyCode.entrySet()) {
 			typedKeyCode.put(entry.getKey(), false);
 		}
+		
 	}
 	
+	/**
+	 * Debug print method.
+	 * @param val
+	 */
+	private void println(String val) {
+		System.out.printf("[KEYBOARD] %s%n", val);
+	}
+	
+	public void post() {
+		this.updateKeys();
+	}
+	
+	/**
+	 * keyPressed() is the method that must be called by PApplet.keyPressed(),
+	 * or by registering it via PApplet.registerMethods()
+	 */
 	public void keyPressed() {
 		keys.put(testScreen.key, true);
 		keyCodes.put(testScreen.keyCode, true);
 
 	}
+	
+	
 	/**
 	 * keyReleased() is the method that must be called inside of
 	 * World.keyReleased or PApplet.keyReleased().
@@ -122,4 +149,6 @@ public class Keyboard {
 		typedKey.put(testScreen.key, true);
 		typedKeyCode.put(testScreen.keyCode, true);
 	}
+	
+	
 }

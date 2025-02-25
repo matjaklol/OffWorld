@@ -3,9 +3,11 @@ package main;
 import game.core.Camera;
 import game.core.World;
 import game.userinput.Keyboard;
+import game.userinput.Mouse;
 import processing.core.PApplet;
 import processing.core.PGraphics;
 import processing.opengl.PGraphicsOpenGL;
+
 public class GameApplet extends PApplet {
 	
 	public PGraphics GameBuffer, HUDBuffer, GameOverlayBuffer;
@@ -13,6 +15,7 @@ public class GameApplet extends PApplet {
 	public World world;
 	public Camera camera;
 	public Keyboard keyboard;
+	public Mouse mouse;
 	/**
 	 * GameApplet is the primary rendering application used by the game.
 	 * @param args
@@ -29,6 +32,7 @@ public class GameApplet extends PApplet {
 		surface.setTitle("OffWorld [Loading]");
 		
 		this.keyboard = new Keyboard(this);
+		this.mouse = new Mouse(this);
 		
 	}
 	
@@ -102,6 +106,9 @@ public class GameApplet extends PApplet {
 	public float scaleFactor() {
 		return displayWidth/640;
 	}
+	
+	
+	
 	
 	
 	public void keyReleased() {
