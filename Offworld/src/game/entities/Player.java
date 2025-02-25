@@ -1,5 +1,6 @@
 package game.entities;
 
+import processing.core.PGraphics;
 import processing.core.PVector;
 
 import java.lang.reflect.Method;
@@ -11,17 +12,23 @@ import main.Main;
 import game.userinput.Keyboard;
 import game.physics.MVector;
 import processing.event.MouseEvent;
+
+
 public class Player extends Entity{
 	private Keyboard keyboard;
 	private MVector vec;
 	private float speed = 500.0f;
 	public Player(World world) {
 		super(world);
+		
+		
 		this.keyboard = world.keyboard;
 		this.vec = new MVector(world);
 		this.vec.maxSpeed(300f);
 		this.vec.mass(63);
-		this.vec.setFrictionConstant(0.5f);
+		
+		this.vec.setFrictionConstant(0.4f);
+		
 		Main.gameApplet.mouse.registerMethod("mouseEvent", this);
 	}
 	
@@ -59,7 +66,9 @@ public class Player extends Entity{
 		} else {
 			world.camera.setFollowMode(Camera.LERP);
 			this.speed = 500f;
-			this.vec.maxSpeed(300);		}
+			this.vec.maxSpeed(300);
+		}
+		
 		speedVector.setMag(speed);
 		this.vec.addVelocity(speedVector);
 		this.vec.damping(0.01f);
@@ -109,6 +118,14 @@ public class Player extends Entity{
 	public void setPosition(float x, float y) {
 		this.setPosition(new PVector(x, y));
 		
+	}
+	
+	
+	private int myWidth = 8;
+	public void draw() {
+		this.graphic.fill(255, 255, 255);
+		this.graphic.noStroke();
+		this.graphic.rect(World.round(this.position.x - myWidth/2), World.round(this.position.y - myWidth/2), myWidth, myWidth);
 	}
 	
 	

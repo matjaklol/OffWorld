@@ -17,6 +17,7 @@ public class Mouse {
 	
 	@Deprecated
 	public int x, y;
+	@Deprecated
 	public int cameraX, cameraY;
 	
 	

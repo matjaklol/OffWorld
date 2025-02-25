@@ -82,7 +82,7 @@ public class World extends PApplet{
 		this.gameBuffer.background(0,0,0);
 		this.gameBuffer.image(starsEffect.getBuffer(), World.floor(camera.getX()), World.floor(camera.getY()), gameBuffer.width, gameBuffer.height);
 		this.solarSystem.draw();
-		
+		this.player.draw();
 //		this.gameBuffer.fill(0,0,255);
 //		this.gameBuffer.ellipse(0, 0, 255, 255);
 		

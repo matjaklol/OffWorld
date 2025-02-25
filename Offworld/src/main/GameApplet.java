@@ -11,11 +11,21 @@ import processing.opengl.PGraphicsOpenGL;
 public class GameApplet extends PApplet {
 	
 	public PGraphics GameBuffer, HUDBuffer, GameOverlayBuffer;
-	public PGraphics vhsImage;
+	private PGraphics vhsImage;
+	
+	/** The game world used by all game/physics objects. */
 	public World world;
+	
+	/** The camera used in {@link GameApplet#world} for rendering at a specific (x, y). */
 	public Camera camera;
+	
+	/** The keyboard handler. */
 	public Keyboard keyboard;
+	
+	/** The mouse event handler. */
 	public Mouse mouse;
+	
+	
 	/**
 	 * GameApplet is the primary rendering application used by the game.
 	 * @param args

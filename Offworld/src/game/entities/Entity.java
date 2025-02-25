@@ -1,6 +1,7 @@
 package game.entities;
 
 
+import processing.core.PGraphics;
 import processing.core.PVector;
 import game.core.World;
 /**
@@ -11,17 +12,18 @@ import game.core.World;
 public class Entity {
 	protected PVector position;
 	protected World world;
+	protected PGraphics graphic;
 	
 	
 	public Entity(World world, PVector position){
 		this.world = world;
+		this.graphic = world.gameBuffer;
 		this.position = new PVector(position.x, position.y, position.z);
 	}
 	
 	
 	public Entity(World world) {
-		this.world = world;
-		this.position = new PVector();
+		this(world, new PVector());
 	}
 	
 	public PVector getPosition() {
@@ -34,6 +36,10 @@ public class Entity {
 	
 	public float getSpeed() {
 		return 0f;
+	}
+	
+	public void draw() {
+		
 	}
 	
 	protected void println(String data) {
